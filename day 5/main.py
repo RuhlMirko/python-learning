@@ -5,34 +5,48 @@ while True:
         case 'add':
             todo = input("Enter a to-do: ") + "\n"
 
-            file = open("files/todo.txt", 'r')
-            todo_list = file.readlines()
-            file.close()
+            with open('files/todo.txt', 'r') as file:
+                todo_list = file.readlines()
 
             todo_list.append(todo)
 
-            file = open("files/todo.txt", 'w')
-            file.writelines(todo_list)
-            file.close()
+            with open('files/todo.txt', 'w') as file:
+                todo_list = file.writelines(todo_list)
+
         case 'show':
-            file = open('files/todo.txt', 'r')
-            todo_list = file.readlines()
-            file.close()
+            with open('files/todo.txt', 'r') as file:
+                todo_list = file.readlines()
 
             # new_todo_list = [item.strip('\n') for item in todo_list]
 
             for index, item in enumerate(todo_list):
                 item = item.strip('\n')
-                row = f"{index + 1}-{item}"
+                row = f"{index + 1}) {item}"
                 print(row)
         case 'edit':
             number = int(input("Number of the todo to edit: "))
-            number = number-1
+            number = number - 1
+
+            with open('files/todo.txt', 'r') as file:
+                todo_list = file.readlines()
+
             new_todo = input("Enter new todo: ")
-            todo_list[number] = new_todo
+
+            todo_list[number] = new_todo + '\n'
+            with open('files/todo.txt', 'w') as file:
+                file.writelines(todo_list)
+
         case 'complete':
             number = int(input("Number of to-do to complete: "))
-            todo_list.pop(number-1)
+
+            with open('files/todo.txt', 'r') as file:
+                todo_list = file.readlines()
+            todo_to_remove = todo_list[number-1].strip('\n')
+            print(f"Todo {number}) '{todo_to_remove}' was removed.")
+
+            todo_list.pop(number - 1)
+            with open('files/todo.txt', 'w') as file:
+                file.writelines(todo_list)
+
         case 'exit':
             break
-
