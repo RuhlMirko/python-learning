@@ -1,5 +1,3 @@
-todo_list = []
-
 while True:
     user_action = input("Type add show edit complete or exit: ").strip()
 
@@ -7,16 +5,20 @@ while True:
         case 'add':
             todo = input("Enter a to-do: ") + "\n"
 
-            file = open("todo.txt", 'r')
+            file = open("files/todo.txt", 'r')
             todo_list = file.readlines()
             file.close()
 
             todo_list.append(todo)
 
-            file = open("todo.txt", 'w')
+            file = open("files/todo.txt", 'w')
             file.writelines(todo_list)
             file.close()
         case 'show':
+            file = open('files/todo.txt', 'r')
+            todo_list = file.readlines()
+            file.close()
+
             for index, item in enumerate(todo_list):
                 row = f"{index + 1}-{item}"
                 print(row)
