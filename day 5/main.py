@@ -1,25 +1,28 @@
+def get_todo_list():
+    with open('files/todo.txt', 'r') as file:
+        content = file.readlines()
+    return content
+
+
+def set_todo_list(list):
+    with open('files/todo.txt', 'w') as file:
+        file.writelines(list)
+
+
 while True:
-    user_action = input("Command prompts "
+    user_action = input("\nCommand prompts "
                         "add <String>, "
                         "show, edit <Int>, "
                         "complete <Int> or exit: ").strip().lower()
 
     if user_action.startswith('add'):
         todo = (user_action[4:] + '\n').capitalize()
-
-        with open('files/todo.txt', 'r') as file:
-            todo_list = file.readlines()
-
+        todo_list = get_todo_list()
         todo_list.append(todo)
-
-        with open('files/todo.txt', 'w') as file:
-            todo_list = file.writelines(todo_list)
+        set_todo_list(todo_list)
 
     elif user_action.startswith('show'):
-        with open('files/todo.txt', 'r') as file:
-            todo_list = file.readlines()
-
-        # new_todo_list = [item.strip('\n') for item in todo_list]
+        todo_list = get_todo_list()
 
         for index, item in enumerate(todo_list):
             item = item.strip('\n')
@@ -30,15 +33,12 @@ while True:
         try:
             number = int(user_action[5:])
             number = number - 1
-
-            with open('files/todo.txt', 'r') as file:
-                todo_list = file.readlines()
+            todo_list = get_todo_list()
 
             new_todo = input("Enter new todo: ")
-
             todo_list[number] = new_todo + '\n'
-            with open('files/todo.txt', 'w') as file:
-                file.writelines(todo_list)
+            set_todo_list(todo_list)
+
         except ValueError:
             print("Invalid")
 
@@ -46,14 +46,14 @@ while True:
         try:
             number = int(user_action[8:])
 
-            with open('files/todo.txt', 'r') as file:
-                todo_list = file.readlines()
+            todo_list = get_todo_list()
+
             todo_to_remove = todo_list[number - 1].strip('\n')
             print(f"Todo {number}) '{todo_to_remove}' was removed.")
-
             todo_list.pop(number - 1)
-            with open('files/todo.txt', 'w') as file:
-                file.writelines(todo_list)
+
+            set_todo_list(todo_list)
+
         except IndexError:
             print(f"Todo number {number} doesn't exist")
         except ValueError:
