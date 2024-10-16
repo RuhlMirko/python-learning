@@ -8,5 +8,6 @@ members.append(member)
 file.writelines(members)
 
 
-
+letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+print(letters[4:])
 
