@@ -8,3 +8,7 @@ file.close()
 numbers = [10.1, 12.3, 14.7]
 numbers = [int(number) for number in numbers]
 print(numbers)
+
+with open("file.txt", 'w') as file:
+    file.write("Hello")
+    file.write("Hi")
