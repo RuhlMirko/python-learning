@@ -1,10 +1,10 @@
 while True:
     user_action = input("Command prompts "
-                        "\nadd <String>,"
+                        "\nadd/new <String>,"
                         "\nshow, edit <Int>,"
                         "\ncomplete <Int> or exit: ").strip().lower()
 
-    if 'add' in user_action:
+    if 'add' in user_action or 'new' in user_action:
         todo = (user_action[4:] + '\n').capitalize()
 
         with open('files/todo.txt', 'r') as file:
