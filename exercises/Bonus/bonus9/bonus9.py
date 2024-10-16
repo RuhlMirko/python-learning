@@ -1,11 +1,11 @@
 password = input("Enter a new password: ")
 
-result = []
+result = {}
 
 if len(password) >= 8:
-    result.append(True)
+    result["length"] = True
 else:
-    result.append(False)
+    result["length"] = False
 
 #  Checks if it has at least three digits
 counter = 0
@@ -14,18 +14,18 @@ for i in password:
         counter += 1
 
 if counter >= 3:
-    result.append(True)
+    result["digits"] = True
 else:
-    result.append(False)
+    result["digits"] = False
 
 upper_char = False
 for char in password:
     if char.isupper():
         upper_char = True
 
-result.append(upper_char)
+result["upper"] = upper_char
 
-if all(result):
+if all(result.values()):
     print("Strong password")
 else:
     print("Weak Password")
