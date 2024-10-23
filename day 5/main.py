@@ -1,6 +1,8 @@
 import functions
+import time
 
 while True:
+    print(time.localtime())
     user_action = input("\nCommand prompts add <String>, show, edit <Int>, complete <Int> or exit: ").strip().lower()
 
     if user_action.startswith('add'):
