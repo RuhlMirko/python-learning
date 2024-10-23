@@ -9,3 +9,7 @@ def set_todo_list(def_list, filepath="files/todo.txt"):
     """ Modifies the file with a new list """
     with open(filepath, 'w') as file:
         file.writelines(def_list)
+
+
+if __name__ == "__main__:":
+    print("hello from functions")
