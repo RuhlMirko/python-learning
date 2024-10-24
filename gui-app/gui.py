@@ -17,15 +17,16 @@ style = tb.Style()
 style.configure('success.TButton', font=("Helvetica", 16))
 
 new_todo_entry = tb.Entry(data_frame, width=80)
-new_todo_entry.pack(pady=20)
+new_todo_entry.pack(pady=10)
 
 new_todo_btn = tb.Button(data_frame, text="Add", bootstyle="success", command=lambda: print(new_todo_entry.get()))
-new_todo_btn.pack(padx=40, fill="both")
+new_todo_btn.pack(padx=10, fill="both", pady=(0, 10))
 
+list_frame = tb.Frame(data_frame)
+list_frame.pack()
 content = functions.get_todo_list()
-for item in content:
-    print_lbl = tb.Label(data_frame, text=item.strip("\n"), font=("Segoe UI", 10, "italic"))
-    print_lbl.pack(anchor="nw", pady=2, ipady=0)
-
+for index, item in enumerate(content):
+    print_lbl = tb.Label(list_frame, text=item.strip("\n"), font=("Segoe UI", 10, "italic"))
+    print_lbl.grid(column=0, row=index, ipady=0, sticky="w")
 
 window.mainloop()
