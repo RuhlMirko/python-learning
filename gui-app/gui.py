@@ -12,7 +12,7 @@ def add_todo_gui(new_todo):
     functions.set_todo_list(list_content)
 
     last_index = len(list_content)
-    print_lbl = tb.Label(list_frame, text=str(last_index) + ") " + new_todo, bootstyle="success")
+    print_lbl = tb.Label(list_frame, text=str(last_index - 1) + ") " + new_todo, bootstyle="success")
     print_lbl.grid(column=0, row=last_index + 1, sticky="w")
 
 
@@ -41,6 +41,21 @@ def update_list():
         actual_string = str(index) + ") " + item.strip('\n')
         print_lbl = tb.Label(list_frame, text=actual_string, font=("Segoe UI", 10, "italic"))
         print_lbl.grid(column=0, row=index, pady=5, sticky="w")
+
+
+def delete_item():
+    index = int(index_entry.get())
+    list_content = functions.get_todo_list()
+
+    print_lbl = tb.Label(list_frame, text=list_content[index].strip('\n') + (" " * 10), font=("Segoe UI", 10, "italic"),
+                         bootstyle="danger")
+    print_lbl.grid(column=0, row=index, pady=5, sticky="w")
+
+    list_content.pop(index)
+    print(list_content)
+    functions.set_todo_list(list_content)
+
+    # update_list()
 
 
 # ---------- Title ---------- #
@@ -77,7 +92,7 @@ edit_btn.pack(padx=10, pady=(0, 10), side='left', fill='both')
 
 # TODO : Implementar el boton de completar/eliminar
 delete_btn = tb.Button(btn_frame, text="Complete", bootstyle="outline-danger", width=10,
-                       command=lambda: edit_todo(new_todo_entry.get()))
+                       command=lambda: delete_item())
 delete_btn.pack(padx=10, pady=(0, 10), side='left', fill='both')
 
 list_frame = tb.Frame(data_frame)
