@@ -1,7 +1,5 @@
-Hello 
+Hello
 World!!
 Programmed
-to work and not to feel
+To work and not to feel
 Not even sure
-That this is real
-Hello world
