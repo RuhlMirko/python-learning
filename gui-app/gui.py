@@ -11,8 +11,8 @@ def add_todo_gui(new_todo):
     list_content.append(new_todo + '\n')
     functions.set_todo_list(list_content)
 
-    print_lbl = tb.Label(list_frame, text=new_todo, bootstyle="success")
     last_index = len(list_content)
+    print_lbl = tb.Label(list_frame, text= str(last_index) + ") " + new_todo, bootstyle="success")
     print_lbl.grid(column=0, row=last_index + 1, sticky="w")
 
 
@@ -23,7 +23,7 @@ def edit_todo(new_todo):
     list_content[index_edit] = str(new_todo + '\n')
     functions.set_todo_list(list_content)
 
-    print_lbl = tb.Label(list_frame, text=str(index_edit) + ") " + (" " * 15) + new_todo, bootstyle="warning")
+    print_lbl = tb.Label(list_frame, text=str(index_edit) + ") " + (" " * 15) + new_todo, bootstyle="info")
     print_lbl.grid(column=0, row=index_edit, pady=5, sticky="w")
 
 
@@ -38,11 +38,11 @@ data_frame.pack()
 style = tb.Style()
 style.configure('success.TButton', font=("Helvetica", 12))
 
-new_todo_entry = tb.Entry(data_frame, width=80)
+new_todo_entry = tb.Entry(data_frame, width=60)
 new_todo_entry.pack(pady=10)
 
 new_todo_btn = tb.Button(data_frame, text="Add", bootstyle="success",
-                         command=lambda: add_todo_gui(new_todo_entry.get()), width=25)
+                         command=lambda: add_todo_gui(new_todo_entry.get()), width=10)
 new_todo_btn.pack(padx=10, pady=(0, 10))
 
 index_lbl = tb.Label(data_frame, text="Enter the index", font=("Segoe UI", 10, "bold"))
@@ -59,7 +59,7 @@ edit_btn = tb.Button(btn_frame, text="Edit", bootstyle="outline-info", width=10,
                      command=lambda: edit_todo(new_todo_entry.get()))
 edit_btn.pack(padx=10, pady=(0, 10), side='left', fill='both')
 
-delete_btn = tb.Button(btn_frame, text="Complete", bootstyle="outline-warning", width=10,
+delete_btn = tb.Button(btn_frame, text="Complete", bootstyle="outline-danger", width=10,
                        command=lambda: edit_todo(new_todo_entry.get()))
 delete_btn.pack(padx=10, pady=(0, 10), side='left', fill='both')
 
