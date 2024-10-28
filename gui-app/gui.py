@@ -16,14 +16,15 @@ def add_todo_gui(new_todo):
     print_lbl.grid(column=0, row=last_index + 1, sticky="w")
 
 
-def edit_todo(new_todo, index_edit):
+def edit_todo(new_todo):
+    index_edit = int(index_entry.get())
     print(index_edit)
-    # list_content = functions.get_todo_list()
-    # list_content[index_edit] = str(new_todo)
-    # functions.set_todo_list(list_content)
-    #
-    # print_lbl = tb.Label(list_frame, text=new_todo, bootstyle="warning")
-    # print_lbl.grid(column=0, row=index_edit, pady=5, sticky="w")
+    list_content = functions.get_todo_list()
+    list_content[index_edit] = str(new_todo + '\n')
+    functions.set_todo_list(list_content)
+
+    print_lbl = tb.Label(list_frame, text=str(index_edit) + ") " + (" " * 15) + new_todo, bootstyle="warning")
+    print_lbl.grid(column=0, row=index_edit, pady=5, sticky="w")
 
 
 # ---------- Title ---------- #
@@ -55,11 +56,11 @@ btn_frame = tb.Frame(data_frame)
 btn_frame.pack()
 
 edit_btn = tb.Button(btn_frame, text="Edit", bootstyle="outline-info", width=10,
-                     command=lambda: edit_todo(new_todo_entry.get(), index))
+                     command=lambda: edit_todo(new_todo_entry.get()))
 edit_btn.pack(padx=10, pady=(0, 10), side='left', fill='both')
 
 delete_btn = tb.Button(btn_frame, text="Complete", bootstyle="outline-warning", width=10,
-                       command=lambda: edit_todo(new_todo_entry.get(), index))
+                       command=lambda: edit_todo(new_todo_entry.get()))
 delete_btn.pack(padx=10, pady=(0, 10), side='left', fill='both')
 
 list_frame = tb.Frame(data_frame)
