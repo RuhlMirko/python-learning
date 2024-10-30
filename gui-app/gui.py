@@ -10,11 +10,7 @@ def add_todo_gui(new_todo):
     list_content = functions.get_todo_list()
     list_content.append(new_todo + '\n')
     functions.set_todo_list(list_content)
-
-    last_index = len(list_content)
-    print_lbl = tb.Label(list_frame, text=str(last_index - 1) + ") " + new_todo, bootstyle="success")
-    print_lbl.grid(column=0, row=last_index + 1, sticky="w")
-
+    update_list()
 
 def edit_todo(new_todo):
     index_edit = int(index_entry.get())
@@ -47,15 +43,19 @@ def delete_item():
     index = int(index_entry.get())
     list_content = functions.get_todo_list()
 
-    print_lbl = tb.Label(list_frame, text=list_content[index].strip('\n') + (" " * 10), font=("Segoe UI", 10, "italic"),
-                         bootstyle="danger")
-    print_lbl.grid(column=0, row=index, pady=5, sticky="w")
-
+    clear_lbl()
     list_content.pop(index)
     print(list_content)
     functions.set_todo_list(list_content)
 
-    # update_list()
+    update_list()
+
+
+def clear_lbl():
+    content = functions.get_todo_list()
+    for index, item in enumerate(content):
+        print_lbl = tb.Label(list_frame, text=(" " * 40), font=("Segoe UI", 10, "italic"))
+        print_lbl.grid(column=0, row=index, pady=5, sticky="w")
 
 
 # ---------- Title ---------- #
@@ -90,7 +90,6 @@ edit_btn = tb.Button(btn_frame, text="Edit", bootstyle="outline-info", width=10,
                      command=lambda: edit_todo(new_todo_entry.get()))
 edit_btn.pack(padx=10, pady=(0, 10), side='left', fill='both')
 
-# TODO : Implementar el boton de completar/eliminar
 delete_btn = tb.Button(btn_frame, text="Complete", bootstyle="outline-danger", width=10,
                        command=lambda: delete_item())
 delete_btn.pack(padx=10, pady=(0, 10), side='left', fill='both')
