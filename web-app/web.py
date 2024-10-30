@@ -3,8 +3,8 @@ import functions
 
 todo_list = functions.get_todo_list()
 
-def add_todo():
 
+def add_todo():
     todo_local = st.session_state['new_todo']
 
     todo_list.append(todo_local + '\n')
@@ -16,8 +16,6 @@ def add_todo():
 st.title("My todo app")
 st.subheader("This is my web todo app")
 st.write("This app is to increase your productivity")
-
-
 
 for index, todo in enumerate(todo_list):
     checkbox = st.checkbox(todo.strip('\n'), key=todo)
