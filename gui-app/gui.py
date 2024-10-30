@@ -12,8 +12,9 @@ def add_todo_gui(new_todo):
     functions.set_todo_list(list_content)
     update_list()
 
+
 def edit_todo(new_todo):
-    index_edit = int(index_entry.get())
+    index_edit = int(index_combo.get())
     print(index_edit)
     list_content = functions.get_todo_list()
     list_content[index_edit] = str(new_todo + '\n')
@@ -40,7 +41,8 @@ def update_list():
 
 
 def delete_item():
-    index = int(index_entry.get())
+    index = int(index_combo.get())
+    print(index)
     list_content = functions.get_todo_list()
 
     clear_lbl()
@@ -76,11 +78,13 @@ new_todo_btn = tb.Button(data_frame, text="ADD", bootstyle="success",
                          command=lambda: add_todo_gui(new_todo_entry.get()), width=10)
 new_todo_btn.pack(padx=10, pady=(0, 10))
 
-index_lbl = tb.Label(data_frame, text="Enter the index to modify", font=("Segoe UI", 10, "bold"))
+index_lbl = tb.Label(data_frame, text="Select the index to modify", font=("Segoe UI", 10, "bold"))
 index_lbl.pack(pady=(5, 0))
 
-index_entry = tb.Entry(data_frame, width=10)
-index_entry.pack(pady=(0, 10))
+combo_values = len(functions.get_todo_list())
+result = [i for i in range(combo_values)]
+index_combo = tb.Combobox(data_frame, bootstyle="primary", width=5, values=result)
+index_combo.pack(pady=(5, 5))
 
 # ---------- Button Frame ---------- #
 btn_frame = tb.Frame(data_frame)
